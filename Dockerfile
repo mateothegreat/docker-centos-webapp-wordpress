@@ -45,7 +45,7 @@ ENV FILE_NAME=latest.tar.gz
 # WORKDIR /www
 # RUN composer install
 
-# EXPOSE 80
+EXPOSE 80
 
 # USER root
 # WORKDIR /
