@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: wordpress-01
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - name: wordpress
+        image: appsoa/docker-centos-webapp-wordpress:latest
+        ports:
+        - containerPort: 80
+          volumeMounts:
+          - mountPath: /www
+            name: persistent-volume
+      volumes:
+      - name: persistent-volume
+        # This GCE PD must already exist.
+        gcePersistentDisk:
+          pdName: vpc-01-prod-outphiit-wordpress-01
+          fsType: ext4
